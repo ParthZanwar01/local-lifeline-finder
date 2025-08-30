@@ -1,101 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Search, Filter, MapPin, Phone, Clock, Globe } from "lucide-react";
-
-// Sample resource data
-const resources = [
-  {
-    id: 1,
-    name: "Community Food Pantry",
-    category: "Food Assistance",
-    description: "Free groceries and meals for families in need. No questions asked, just come as you are.",
-    address: "123 Main Street, Community Center",
-    phone: "(555) 123-4567",
-    hours: "Mon-Fri 9AM-5PM, Sat 10AM-2PM",
-    website: "www.communityfoodpantry.org",
-    tags: ["food", "emergency", "free"],
-  },
-  {
-    id: 2,
-    name: "Learning & Literacy Center",
-    category: "Education",
-    description: "Free tutoring, GED preparation, and computer classes for all ages.",
-    address: "456 Education Blvd",
-    phone: "(555) 234-5678",
-    hours: "Mon-Thu 10AM-8PM, Fri-Sat 10AM-4PM",
-    website: "www.learningcenter.org",
-    tags: ["education", "tutoring", "computer", "GED"],
-  },
-  {
-    id: 3,
-    name: "Senior Support Services",
-    category: "Senior Care",
-    description: "Meal delivery, transportation, and wellness checks for seniors 65+.",
-    address: "789 Elder Way",
-    phone: "(555) 345-6789",
-    hours: "24/7 Emergency Line",
-    website: "www.seniorsupport.org",
-    tags: ["seniors", "meals", "transportation", "wellness"],
-  },
-  {
-    id: 4,
-    name: "Youth Development Program",
-    category: "Youth Services",
-    description: "After-school programs, mentorship, and summer camps for ages 5-18.",
-    address: "321 Youth Center Dr",
-    phone: "(555) 456-7890",
-    hours: "Mon-Fri 3PM-8PM, Summer Daily 8AM-6PM",
-    website: "www.youthdev.org",
-    tags: ["youth", "mentorship", "camps", "after-school"],
-  },
-  {
-    id: 5,
-    name: "Mental Health Support Group",
-    category: "Health & Wellness",
-    description: "Free counseling services and support groups for mental health and substance abuse.",
-    address: "654 Wellness Ave",
-    phone: "(555) 567-8901",
-    hours: "Mon-Fri 9AM-6PM, Crisis Line 24/7",
-    website: "www.mentalhealthsupport.org",
-    tags: ["mental health", "counseling", "support groups", "crisis"],
-  },
-  {
-    id: 6,
-    name: "Job Training & Placement",
-    category: "Employment",
-    description: "Career counseling, job training programs, and placement assistance.",
-    address: "987 Career Path",
-    phone: "(555) 678-9012",
-    hours: "Mon-Fri 8AM-5PM",
-    website: "www.jobtraining.org",
-    tags: ["employment", "job training", "career", "placement"],
-  },
-  {
-    id: 7,
-    name: "Housing Assistance Program",
-    category: "Housing",
-    description: "Emergency housing, rental assistance, and homeless prevention services.",
-    address: "147 Housing Way",
-    phone: "(555) 789-0123",
-    hours: "Mon-Fri 8AM-4PM, Emergency 24/7",
-    website: "www.housinghelp.org",
-    tags: ["housing", "rental assistance", "homeless", "emergency"],
-  },
-  {
-    id: 8,
-    name: "Community Health Clinic",
-    category: "Health & Wellness",
-    description: "Low-cost medical care, vaccinations, and health screenings.",
-    address: "258 Health St",
-    phone: "(555) 890-1234",
-    hours: "Mon-Fri 7AM-7PM, Sat 8AM-4PM",
-    website: "www.communityclinic.org",
-    tags: ["healthcare", "medical", "vaccinations", "low-cost"],
-  },
-];
+import { useResources } from "@/hooks/useResources";
 
 const categories = [
   "All Categories",
@@ -109,9 +18,14 @@ const categories = [
 ];
 
 export const ResourceDirectory = () => {
+  const { resources, loading } = useResources();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [filteredResources, setFilteredResources] = useState(resources);
+
+  useEffect(() => {
+    setFilteredResources(resources);
+  }, [resources]);
 
   const handleSearch = (search: string, category: string) => {
     let filtered = resources;
@@ -124,7 +38,7 @@ export const ResourceDirectory = () => {
       filtered = filtered.filter(resource =>
         resource.name.toLowerCase().includes(search.toLowerCase()) ||
         resource.description.toLowerCase().includes(search.toLowerCase()) ||
-        resource.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase()))
+        (resource.tags && resource.tags.some(tag => tag.toLowerCase().includes(search.toLowerCase())))
       );
     }
     
@@ -197,9 +111,18 @@ export const ResourceDirectory = () => {
           </p>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-12">
+            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-muted-foreground">Loading resources...</p>
+          </div>
+        )}
+
         {/* Resource Cards */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredResources.map((resource) => (
+        {!loading && (
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredResources.map((resource) => (
             <Card key={resource.id} className="shadow-card hover:shadow-feature transition-all duration-300 bg-gradient-card border-border">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
@@ -237,19 +160,22 @@ export const ResourceDirectory = () => {
                   </a>
                 </div>
                 
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {resource.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
+                {resource.tags && resource.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {resource.tags.map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {filteredResources.length === 0 && (
+        {!loading && filteredResources.length === 0 && (
           <div className="text-center py-12">
             <div className="text-6xl mb-4">🔍</div>
             <h3 className="text-2xl font-semibold text-foreground mb-2">No resources found</h3>

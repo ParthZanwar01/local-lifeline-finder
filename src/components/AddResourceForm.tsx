@@ -5,8 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
 import { Plus, Send } from "lucide-react";
+import { useResources } from "@/hooks/useResources";
 
 const categories = [
   "Food Assistance",
@@ -23,7 +23,7 @@ const categories = [
 ];
 
 export const AddResourceForm = () => {
-  const { toast } = useToast();
+  const { submitResource } = useResources();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -34,35 +34,31 @@ export const AddResourceForm = () => {
     email: "",
     website: "",
     hours: "",
-    contactPerson: "",
-    additionalInfo: ""
+    contact_person: "",
+    additional_info: ""
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const result = await submitResource(formData);
 
-    toast({
-      title: "Resource Submitted Successfully!",
-      description: "Thank you for helping grow our community resource hub. Your submission will be reviewed and added to our directory.",
-    });
-
-    // Reset form
-    setFormData({
-      name: "",
-      category: "",
-      description: "",
-      address: "",
-      phone: "",
-      email: "",
-      website: "",
-      hours: "",
-      contactPerson: "",
-      additionalInfo: ""
-    });
+    if (result.success) {
+      // Reset form
+      setFormData({
+        name: "",
+        category: "",
+        description: "",
+        address: "",
+        phone: "",
+        email: "",
+        website: "",
+        hours: "",
+        contact_person: "",
+        additional_info: ""
+      });
+    }
 
     setIsSubmitting(false);
   };
@@ -224,8 +220,8 @@ export const AddResourceForm = () => {
                     </Label>
                     <Input
                       id="contactPerson"
-                      value={formData.contactPerson}
-                      onChange={(e) => handleInputChange("contactPerson", e.target.value)}
+                      value={formData.contact_person}
+                      onChange={(e) => handleInputChange("contact_person", e.target.value)}
                       placeholder="Jane Doe, Program Director"
                       className="shadow-soft"
                     />
@@ -238,8 +234,8 @@ export const AddResourceForm = () => {
                   </Label>
                   <Textarea
                     id="additionalInfo"
-                    value={formData.additionalInfo}
-                    onChange={(e) => handleInputChange("additionalInfo", e.target.value)}
+                    value={formData.additional_info}
+                    onChange={(e) => handleInputChange("additional_info", e.target.value)}
                     placeholder="Any additional details, requirements, or special programs..."
                     rows={3}
                     className="shadow-soft resize-none"
