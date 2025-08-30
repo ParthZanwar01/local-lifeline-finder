@@ -9,52 +9,56 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    /* Verdant Design System - Fresh & Clean */
+    --background: 0 0% 100%;
+    --foreground: 160 8% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 160 8% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 160 8% 15%;
 
-    --primary: 210 60% 45%;
+    /* Verdant Green Primary */
+    --primary: 142 71% 45%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 210 65% 55%;
+    --primary-glow: 142 71% 55%;
 
-    --secondary: 155 45% 50%;
-    --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 155 50% 60%;
+    /* Natural Secondary */
+    --secondary: 45 20% 95%;
+    --secondary-foreground: 160 8% 15%;
+    --secondary-glow: 45 25% 90%;
 
-    --muted: 210 15% 95%;
-    --muted-foreground: 215 20% 45%;
+    --muted: 45 10% 96%;
+    --muted-foreground: 160 6% 45%;
 
-    --accent: 45 85% 65%;
-    --accent-foreground: 215 25% 15%;
-    --accent-glow: 45 90% 75%;
+    /* Fresh Accent */
+    --accent: 85 60% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 85 65% 60%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 88%;
-    --input: 210 15% 95%;
-    --ring: 210 60% 45%;
+    --border: 45 15% 90%;
+    --input: 45 10% 96%;
+    --ring: 142 71% 45%;
 
-    /* Community Hub Design System */
-    --community-blue: 210 60% 45%;
-    --community-green: 155 45% 50%;
-    --warm-orange: 25 85% 60%;
-    --soft-purple: 265 40% 60%;
+    /* Verdant Color Palette */
+    --verdant-green: 142 71% 45%;
+    --verdant-sage: 120 15% 75%;
+    --verdant-cream: 45 30% 95%;
+    --verdant-earth: 25 25% 65%;
     
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--community-blue)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
     --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted)));
-    --gradient-accent: linear-gradient(120deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+    --gradient-accent: linear-gradient(120deg, hsl(var(--verdant-green)), hsl(var(--primary-glow)));
     
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(var(--community-blue) / 0.15);
-    --shadow-card: 0 8px 30px -8px hsl(var(--community-blue) / 0.2);
-    --shadow-feature: 0 12px 40px -12px hsl(var(--community-blue) / 0.25);
+    --shadow-soft: 0 2px 10px -2px hsl(var(--verdant-green) / 0.08);
+    --shadow-card: 0 4px 20px -4px hsl(var(--verdant-green) / 0.12);
+    --shadow-feature: 0 8px 30px -8px hsl(var(--verdant-green) / 0.15);
 
     --radius: 0.5rem;
 
