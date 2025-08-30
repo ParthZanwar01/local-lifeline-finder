@@ -81,8 +81,9 @@ export const CommunityNews = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main News Section */}
           <div className="lg:col-span-2 space-y-6">
-            {newsItems.map((item) => (
-              <Card key={item.id} className="shadow-card hover:shadow-feature transition-all duration-300 bg-gradient-card border-border">
+            {newsItems.map((item, index) => (
+              <Card key={item.id} className="shadow-card hover:shadow-feature transition-all duration-300 bg-gradient-card border-border animate-fade-in hover-lift"
+                    style={{animationDelay: `${index * 0.1}s`, animationFillMode: 'both'}}>
                 <CardHeader>
                   <div className="flex flex-wrap items-center gap-2 mb-2">
                     <Badge 
@@ -134,9 +135,9 @@ export const CommunityNews = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-6 animate-fade-in" style={{animationDelay: '0.4s', animationFillMode: 'both'}}>
             {/* Quick Events */}
-            <Card className="shadow-card bg-gradient-card border-border">
+            <Card className="shadow-card bg-gradient-card border-border hover-lift">
               <CardHeader>
                 <CardTitle className="text-lg text-foreground flex items-center">
                   <Calendar className="w-5 h-5 mr-2 text-community-blue" />
@@ -145,7 +146,7 @@ export const CommunityNews = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 {upcomingEvents.map((event, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg hover-scale transition-all duration-200">
                     <div>
                       <div className="font-medium text-foreground text-sm">{event.title}</div>
                       <div className="text-xs text-muted-foreground">{event.participants}</div>
@@ -162,7 +163,7 @@ export const CommunityNews = () => {
             </Card>
 
             {/* Community Stats */}
-            <Card className="shadow-card bg-gradient-accent border-border">
+            <Card className="shadow-card bg-gradient-accent border-border hover-lift">
               <CardHeader>
                 <CardTitle className="text-lg text-accent-foreground flex items-center">
                   <Users className="w-5 h-5 mr-2" />
@@ -188,7 +189,7 @@ export const CommunityNews = () => {
             </Card>
 
             {/* Newsletter Signup */}
-            <Card className="shadow-card bg-gradient-card border-border">
+            <Card className="shadow-card bg-gradient-card border-border hover-lift">
               <CardHeader>
                 <CardTitle className="text-lg text-foreground">Stay Connected</CardTitle>
                 <CardDescription>
