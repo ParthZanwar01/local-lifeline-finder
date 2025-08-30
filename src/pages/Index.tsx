@@ -1,16 +1,18 @@
-import { Header } from "@/components/Header";
-import { VerdantHero } from "@/components/VerdantHero";
-import { WelcomeSection } from "@/components/WelcomeSection";
-import { FeaturesSection } from "@/components/FeaturesSection";
+import { HeroSection } from "@/components/HeroSection";
+import { FeaturedResources } from "@/components/FeaturedResources";
+import { ResourceDirectory } from "@/components/ResourceDirectory";
+import { AddResourceForm } from "@/components/AddResourceForm";
+import { CommunityNews } from "@/components/CommunityNews";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
   return (
     <main className="min-h-screen">
-      <Header />
-      <VerdantHero />
-      <WelcomeSection />
-      <FeaturesSection />
+      <HeroSection />
+      <FeaturedResources />
+      <ResourceDirectory />
+      <CommunityNews />
+      <AddResourceForm />
       <Footer />
     </main>
   );
