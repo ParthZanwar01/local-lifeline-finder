@@ -57,11 +57,10 @@ export const FeaturedResources = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {featuredResources.map((resource, index) => {
+          {featuredResources.map((resource) => {
             const IconComponent = resource.icon;
             return (
-              <Card key={resource.id} className="group shadow-card hover:shadow-feature transition-all duration-500 bg-gradient-card border-border overflow-hidden animate-fade-in hover-lift"
-                    style={{animationDelay: `${index * 0.2}s`, animationFillMode: 'both'}}>
+              <Card key={resource.id} className="group shadow-card hover:shadow-feature transition-all duration-500 bg-gradient-card border-border overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={resource.image} 
@@ -74,7 +73,7 @@ export const FeaturedResources = () => {
                       {resource.category}
                     </Badge>
                   </div>
-                  <div className={`absolute top-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-sm ${resource.color} animate-float`}>
+                  <div className={`absolute top-4 right-4 p-2 rounded-full bg-white/20 backdrop-blur-sm ${resource.color}`}>
                     <IconComponent className="w-6 h-6" />
                   </div>
                 </div>

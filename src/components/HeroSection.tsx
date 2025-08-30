@@ -20,9 +20,8 @@ export const HeroSection = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center lg:text-left animate-fade-in">
-        <div className="max-w-3xl animate-scale-in"
-             style={{animationDelay: '0.2s', animationFillMode: 'both'}}>
+      <div className="relative z-10 container mx-auto px-6 text-center lg:text-left">
+        <div className="max-w-3xl">
           <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
             Your Community
             <span className="bg-gradient-accent bg-clip-text text-transparent block mt-2">
@@ -57,17 +56,16 @@ export const HeroSection = () => {
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-white animate-fade-in"
-               style={{animationDelay: '0.6s', animationFillMode: 'both'}}>
-            <div className="text-center lg:text-left hover-lift">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-white">
+            <div className="text-center lg:text-left">
               <div className="text-3xl font-bold text-accent-glow">50+</div>
               <div className="text-white/80">Community Resources</div>
             </div>
-            <div className="text-center lg:text-left hover-lift">
+            <div className="text-center lg:text-left">
               <div className="text-3xl font-bold text-accent-glow">15</div>
               <div className="text-white/80">Service Categories</div>
             </div>
-            <div className="text-center lg:text-left hover-lift">
+            <div className="text-center lg:text-left">
               <div className="text-3xl font-bold text-accent-glow">
                 <Users className="w-8 h-8 inline mr-2" />
                 1000+

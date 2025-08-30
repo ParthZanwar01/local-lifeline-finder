@@ -85,7 +85,7 @@ export const AddResourceForm = () => {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <Card className="shadow-feature bg-gradient-card border-border animate-scale-in hover-lift">
+          <Card className="shadow-feature bg-gradient-card border-border">
             <CardHeader>
               <CardTitle className="flex items-center text-2xl text-foreground">
                 <Plus className="w-6 h-6 mr-3 text-community-green" />

@@ -154,7 +154,7 @@ export const ResourceDirectory = () => {
         </div>
 
         {/* Search and Filter */}
-        <div className="max-w-4xl mx-auto mb-12 animate-fade-in">
+        <div className="max-w-4xl mx-auto mb-12">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
@@ -175,14 +175,14 @@ export const ResourceDirectory = () => {
           </div>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap gap-2 animate-fade-in" style={{animationDelay: '0.2s', animationFillMode: 'both'}}>
+          <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <Button
                 key={category}
                 variant={selectedCategory === category ? "default" : "outline"}
                 size="sm"
                 onClick={() => updateCategory(category)}
-                className="transition-all duration-200 hover-scale"
+                className="transition-all duration-200"
               >
                 {category}
               </Button>
@@ -199,9 +199,8 @@ export const ResourceDirectory = () => {
 
         {/* Resource Cards */}
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          {filteredResources.map((resource, index) => (
-            <Card key={resource.id} className="shadow-card hover:shadow-feature transition-all duration-300 bg-gradient-card border-border animate-fade-in hover-lift"
-                  style={{animationDelay: `${index * 0.1}s`, animationFillMode: 'both'}}>
+          {filteredResources.map((resource) => (
+            <Card key={resource.id} className="shadow-card hover:shadow-feature transition-all duration-300 bg-gradient-card border-border">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
                   <CardTitle className="text-xl text-foreground">{resource.name}</CardTitle>
