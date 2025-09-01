@@ -18,6 +18,28 @@ export interface Resource {
   is_approved: boolean;
   created_at: string;
   updated_at: string;
+  
+  // Enhanced properties for better resource management
+  is_featured?: boolean;
+  rating?: number;
+  review_count?: number;
+  approved_by?: string;
+  image_url?: string;
+  coordinates?: { lat: number; lng: number };
+  
+  // Service details
+  cost?: string;
+  eligibility_requirements?: string;
+  emergency_contact?: string;
+  
+  // Accessibility and language support
+  accessibility_features?: string[];
+  languages?: string[];
+  
+  // Additional metadata
+  submitted_by?: string;
+  last_verified?: string;
+  verification_status?: 'verified' | 'pending' | 'needs_update';
 }
 
 export const useResources = () => {

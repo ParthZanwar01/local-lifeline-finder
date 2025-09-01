@@ -25,27 +25,27 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))',
-					glow: 'hsl(var(--primary-glow))'
+					DEFAULT: '#10B981', // Teal
+					foreground: '#FFFFFF',
+					glow: '#10B981'
 				},
 				secondary: {
-					DEFAULT: 'hsl(var(--secondary))',
-					foreground: 'hsl(var(--secondary-foreground))',
-					glow: 'hsl(var(--secondary-glow))'
+					DEFAULT: '#F97316', // Coral
+					foreground: '#FFFFFF',
+					glow: '#F97316'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
 					foreground: 'hsl(var(--destructive-foreground))'
 				},
 				muted: {
-					DEFAULT: 'hsl(var(--muted))',
-					foreground: 'hsl(var(--muted-foreground))'
+					DEFAULT: '#F9FAFB', // Light gray sections
+					foreground: '#374151' // Body text
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))',
-					glow: 'hsl(var(--accent-glow))'
+					DEFAULT: '#10B981', // Teal
+					foreground: '#FFFFFF',
+					glow: '#10B981'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -55,11 +55,15 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				community: {
-					blue: 'hsl(var(--community-blue))',
-					green: 'hsl(var(--community-green))',
-					orange: 'hsl(var(--warm-orange))',
-					purple: 'hsl(var(--soft-purple))'
+				// New flat brand colors
+				brand: {
+					teal: '#10B981',
+					'teal-dark': '#059669',
+					coral: '#F97316',
+					'coral-dark': '#EA580C',
+					'gray-light': '#F9FAFB',
+					'gray-body': '#374151',
+					'gray-heading': '#111827'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',

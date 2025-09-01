@@ -7,67 +7,434 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "13.0.4"
   }
   public: {
     Tables: {
-      resources: {
+      profiles: {
         Row: {
-          additional_info: string | null
-          address: string | null
-          category: string
-          contact_person: string | null
-          created_at: string
-          description: string
-          email: string | null
-          hours: string | null
           id: string
-          is_approved: boolean | null
-          name: string
+          email: string
+          full_name: string | null
+          avatar_url: string | null
+          role: 'user' | 'admin' | 'moderator'
           phone: string | null
-          submitted_by: string | null
-          tags: string[] | null
+          address: string | null
+          bio: string | null
+          created_at: string
           updated_at: string
-          website: string | null
+          last_login: string | null
+          is_verified: boolean
         }
         Insert: {
-          additional_info?: string | null
-          address?: string | null
-          category: string
-          contact_person?: string | null
-          created_at?: string
-          description: string
-          email?: string | null
-          hours?: string | null
-          id?: string
-          is_approved?: boolean | null
-          name: string
+          id: string
+          email: string
+          full_name?: string | null
+          avatar_url?: string | null
+          role?: 'user' | 'admin' | 'moderator'
           phone?: string | null
-          submitted_by?: string | null
-          tags?: string[] | null
+          address?: string | null
+          bio?: string | null
+          created_at?: string
           updated_at?: string
-          website?: string | null
+          last_login?: string | null
+          is_verified?: boolean
         }
         Update: {
-          additional_info?: string | null
-          address?: string | null
-          category?: string
-          contact_person?: string | null
-          created_at?: string
-          description?: string
-          email?: string | null
-          hours?: string | null
           id?: string
-          is_approved?: boolean | null
-          name?: string
+          email?: string
+          full_name?: string | null
+          avatar_url?: string | null
+          role?: 'user' | 'admin' | 'moderator'
           phone?: string | null
-          submitted_by?: string | null
-          tags?: string[] | null
+          address?: string | null
+          bio?: string | null
+          created_at?: string
           updated_at?: string
+          last_login?: string | null
+          is_verified?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      resources: {
+        Row: {
+          id: string
+          name: string
+          category: string
+          description: string
+          address: string | null
+          phone: string | null
+          email: string | null
+          website: string | null
+          hours: string | null
+          contact_person: string | null
+          additional_info: string | null
+          tags: string[] | null
+          is_approved: boolean
+          is_featured: boolean
+          rating: number | null
+          review_count: number
+          created_at: string
+          updated_at: string
+          submitted_by: string | null
+          approved_by: string | null
+          approved_at: string | null
+          image_url: string | null
+          coordinates: { lat: number; lng: number } | null
+          accessibility_features: string[] | null
+          languages: string[] | null
+          eligibility_requirements: string | null
+          cost: string | null
+          emergency_contact: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          category: string
+          description: string
+          address?: string | null
+          phone?: string | null
+          email?: string | null
           website?: string | null
+          hours?: string | null
+          contact_person?: string | null
+          additional_info?: string | null
+          tags?: string[] | null
+          is_approved?: boolean
+          is_featured?: boolean
+          rating?: number | null
+          review_count?: number
+          created_at?: string
+          updated_at?: string
+          submitted_by?: string | null
+          approved_by?: string | null
+          approved_at?: string | null
+          image_url?: string | null
+          coordinates?: { lat: number; lng: number } | null
+          accessibility_features?: string[] | null
+          languages?: string[] | null
+          eligibility_requirements?: string | null
+          cost?: string | null
+          emergency_contact?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          category?: string
+          description?: string
+          address?: string | null
+          phone?: string | null
+          email?: string | null
+          website?: string | null
+          hours?: string | null
+          contact_person?: string | null
+          additional_info?: string | null
+          tags?: string[] | null
+          is_approved?: boolean
+          is_featured?: boolean
+          rating?: number | null
+          review_count?: number
+          created_at?: string
+          updated_at?: string
+          submitted_by?: string | null
+          approved_by?: string | null
+          approved_at?: string | null
+          image_url?: string | null
+          coordinates?: { lat: number; lng: number } | null
+          accessibility_features?: string[] | null
+          languages?: string[] | null
+          eligibility_requirements?: string | null
+          cost?: string | null
+          emergency_contact?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resources_submitted_by_fkey"
+            columns: ["submitted_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resources_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      events: {
+        Row: {
+          id: string
+          title: string
+          description: string
+          start_date: string
+          end_date: string
+          start_time: string | null
+          end_time: string | null
+          location: string
+          address: string | null
+          coordinates: { lat: number; lng: number } | null
+          category: string
+          type: 'event' | 'program' | 'workshop' | 'volunteer' | 'meeting'
+          is_recurring: boolean
+          recurrence_pattern: string | null
+          max_participants: number | null
+          current_participants: number
+          registration_required: boolean
+          registration_deadline: string | null
+          cost: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          website: string | null
+          image_url: string | null
+          tags: string[] | null
+          is_approved: boolean
+          created_by: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          description: string
+          start_date: string
+          end_date: string
+          start_time?: string | null
+          end_time?: string | null
+          location: string
+          address?: string | null
+          coordinates?: { lat: number; lng: number } | null
+          category: string
+          type?: 'event' | 'program' | 'workshop' | 'volunteer' | 'meeting'
+          is_recurring?: boolean
+          recurrence_pattern?: string | null
+          max_participants?: number | null
+          current_participants?: number
+          registration_required?: boolean
+          registration_deadline?: string | null
+          cost?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          website?: string | null
+          image_url?: string | null
+          tags?: string[] | null
+          is_approved?: boolean
+          created_by: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          description?: string
+          start_date?: string
+          end_date?: string
+          start_time?: string | null
+          end_time?: string | null
+          location?: string
+          address?: string | null
+          coordinates?: { lat: number; lng: number } | null
+          category?: string
+          type?: 'event' | 'program' | 'workshop' | 'volunteer' | 'meeting'
+          is_recurring?: boolean
+          recurrence_pattern?: string | null
+          max_participants?: number | null
+          current_participants?: number
+          registration_required?: boolean
+          registration_deadline?: string | null
+          cost?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          website?: string | null
+          image_url?: string | null
+          tags?: string[] | null
+          is_approved?: boolean
+          created_by?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      resource_reviews: {
+        Row: {
+          id: string
+          resource_id: string
+          user_id: string
+          rating: number
+          review_text: string | null
+          is_verified_visit: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          resource_id: string
+          user_id: string
+          rating: number
+          review_text?: string | null
+          is_verified_visit?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          resource_id?: string
+          user_id?: string
+          rating?: number
+          review_text?: string | null
+          is_verified_visit?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "resource_reviews_resource_id_fkey"
+            columns: ["resource_id"]
+            isOneToOne: false
+            referencedRelation: "resources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "resource_reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      event_registrations: {
+        Row: {
+          id: string
+          event_id: string
+          user_id: string
+          registration_date: string
+          status: 'registered' | 'attended' | 'cancelled' | 'waitlist'
+          notes: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          event_id: string
+          user_id: string
+          registration_date?: string
+          status?: 'registered' | 'attended' | 'cancelled' | 'waitlist'
+          notes?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          event_id?: string
+          user_id?: string
+          registration_date?: string
+          status?: 'registered' | 'attended' | 'cancelled' | 'waitlist'
+          notes?: string | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_registrations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_registrations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      categories: {
+        Row: {
+          id: string
+          name: string
+          description: string | null
+          icon: string | null
+          color: string | null
+          parent_id: string | null
+          is_active: boolean
+          sort_order: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string | null
+          icon?: string | null
+          color?: string | null
+          parent_id?: string | null
+          is_active?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string | null
+          icon?: string | null
+          color?: string | null
+          parent_id?: string | null
+          is_active?: boolean
+          sort_order?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "categories_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      newsletters: {
+        Row: {
+          id: string
+          email: string
+          is_active: boolean
+          preferences: Json | null
+          subscribed_at: string
+          unsubscribed_at: string | null
+        }
+        Insert: {
+          id?: string
+          email: string
+          is_active?: boolean
+          preferences?: Json | null
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+        }
+        Update: {
+          id?: string
+          email?: string
+          is_active?: boolean
+          preferences?: Json | null
+          subscribed_at?: string
+          unsubscribed_at?: string | null
         }
         Relationships: []
       }
